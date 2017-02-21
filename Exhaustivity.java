@@ -5,6 +5,9 @@
  */
 package algorithms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Wangdan
@@ -14,6 +17,7 @@ public class Exhaustivity {
     private void exhaustivity_algo(int max, int min, int size) {
         if (max - min + 1 != size * size) {
             System.out.println("not correct numbers!!!");
+            return;
         }
 
         String str = "";
@@ -129,8 +133,43 @@ public class Exhaustivity {
         return str;
     }
 
+    private void recursion_algo(int max, int min, int size) {
+        if (max - min + 1 != size * size) {
+            System.out.println("not correct numbers!!!");
+            return;
+        }
+        List<Integer> res = new ArrayList<Integer>();
+        List<Integer> re = new ArrayList<Integer>();
+        for (int i = min; i <= max; i++) {
+            res.add(i);
+        }
+        res = recursion(res, re);
+
+    }
+
+    private List<Integer> recursion(List<Integer> res, List<Integer> re) {
+        if (res.size() == 1) {
+            re.add(res.get(0));
+            System.out.println(re.toString());
+            re.remove(re.size() - 1);
+        } else {
+            for (int i = 0; i < res.size(); i++) {
+                re.add(res.get(i));
+                List<Integer> tmp_res = new ArrayList<Integer>();
+                for (Integer num : res) {
+                    tmp_res.add(num);
+                }
+                tmp_res.remove(i);
+                recursion(tmp_res, re);
+                re.remove(re.size() - 1);
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         new Exhaustivity().exhaustivity_algo(9, 1, 3);
+        new Exhaustivity().recursion_algo(4, 1, 2);
     }
 
 }
