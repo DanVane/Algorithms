@@ -35,6 +35,7 @@ public class Exhaustivity {
             上的数字大的数字所在的位置,将这两个位置上的数字交换,再将该位置右边的所有
             元素颠倒过来,即将它们按从小到大的顺序排列,就得到了下一个排列. 
          */
+		 
         for (int i = 0; i < res.length; i++) {
             res[i] = min++;
         }
